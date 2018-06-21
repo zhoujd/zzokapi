@@ -17,7 +17,7 @@ zzokapi
             ## add for import path
             srcdir = os.path.dirname(os.path.realpath(__file__))
             srcdir = srcdir.replace("\\", "/")
-            sys.path.append(srcdir + "/../lib/python")
+            sys.path.append(srcdir + "zzokapi")
         
             import utils.common as common
             import framework.dispatch as dispatch
