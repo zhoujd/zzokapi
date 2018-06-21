@@ -45,7 +45,6 @@ class Dispatch:
         for app in self.appmap:
             print "Use: %s %s [argv]" % (self.entryname, app)
 
-        print ""
         print "Use: %s help <app>" % self.entryname
         
     def findapp(self, app):
