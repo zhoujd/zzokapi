@@ -29,13 +29,30 @@ class Dispatch:
                 print "cmdline: %s\n" % cmdline
                 os.system(cmdline)
         else:
-            app = self.findapp(self.params[1])
+            if len(self.params) >= 4:
+                print "4\n"
+                self.cmd = "%s-%s-%s" % (self.params[1], self.params[2], self.params[3])
+                self.args = " ".join(self.params[4:])
+            elif len(self.params) >= 3:
+                print "3\n"
+                self.cmd = "%s-%s" % (self.params[1], self.params[2])
+                self.args = " ".join(self.params[3:])
+            elif len(self.params) >= 2:
+                print "1\n"
+                self.cmd = "%s" % (self.params[1])
+                self.args = " ".join(self.params[2:])
+            else:
+                pass
+
+            print "cmd: %s  <=> %s\n" % (self.cmd, self.args)
+                
+            app = self.findapp(self.cmd)
             if app == None:
-                print "Can't find %s to usaged\n" % self.params[1]
+                print "Can't find %s to usaged\n" % self.cmd
                 print "Try to run '%s help' to get help\n" % self.entryname
             else:
                 #print app
-                cmdline = "%s %s" % (" ".join(app), " ".join(self.params[2:]))
+                cmdline = "%s %s" % (" ".join(app), self.args)
                 print "cmdline: %s\n" % cmdline
                 os.system(cmdline)
 
