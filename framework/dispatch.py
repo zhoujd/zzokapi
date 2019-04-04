@@ -82,7 +82,10 @@ class Dispatch:
                 print('Subfile: %s' % subfile)
 
             for f in subfile:
-                applist.append(f)
+                filefullname = "%s/%s" % (dirname, f)
+                if os.access(filefullname, os.X_OK):
+                    applist.append(f)
+            break
         
         for ignore in config.appignorefiles:
             try:
