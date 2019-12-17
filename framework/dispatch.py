@@ -1,4 +1,5 @@
 ### dispatch.py
+# -*- coding: utf-8 -*-
 
 import glob
 import os
