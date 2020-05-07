@@ -5,7 +5,6 @@ import os
 import framework.config as config
 
 class Dispatch:
-
     def __init__(self, workdir, srcdir, argv):
         self.workdir = workdir
         self.srcdir = srcdir
@@ -23,17 +22,20 @@ class Dispatch:
             app = None
             match = False
 
-            for num in range(config.maxmatch, -1, -1):
+            for num in range(config.maxmatch, 1, -1):
               if len(self.params) >= num and match is False:
-                cmd = "-".join(self.params[1:num-1])
+                cmd = "-".join(self.params[1:num])
                 args = " ".join(self.params[num:])
+                if config.verbose is True:
+                    print("try cmd: %s to usaged\n" % cmd)
+                    print("try args: %s to usaged\n" % args)
                 app = self.findapp(cmd)
                 if app is not None:
                     match = True
                     break
 
             if app is None and match is False:
-                print("Can't find %s to usaged\n" % cmd)
+                print("Can't find cmd to usaged\n")
                 print("Try to run '%s help' to get help\n" % self.entryname)
             else:
                 if config.verbose is True:
@@ -77,16 +79,17 @@ class Dispatch:
         for app in applist:
             appinfo = []
             appname, appext = os.path.splitext(app)
+            apptype = None
 
-            if appext == "":
-                appinfo.append("")
-            elif appext in config.appnames:
-                appinfo.append(config.appnames[appext])
-            else:
-                continue
+            if appext in config.appnames:
+                apptype = config.appnames[appext]
+            elif appext == "" and config.supportnoext is True:
+                apptype = ""
 
-            appinfo.append(self.srcdir + "/" + config.appdirname + "/" + app)
-            self.appmap[appname] = appinfo
+            if apptype is not None:
+                appinfo.append(apptype)
+                appinfo.append(self.srcdir + "/" + config.appdirname + "/" + app)
+                self.appmap[appname] = appinfo
 
         if config.verbose is True:
             print(self.appmap)
