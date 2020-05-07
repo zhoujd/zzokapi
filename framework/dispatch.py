@@ -68,7 +68,8 @@ class Dispatch:
                 filefullname = "%s/%s" % (dirname, f)
                 if os.access(filefullname, os.X_OK):
                     applist.append(f)
-            break
+            if config.limitdept is True:
+                break
 
         for ignore in config.appignorefiles:
             try:
@@ -84,7 +85,7 @@ class Dispatch:
             if appext in config.appnames:
                 apptype = config.appnames[appext]
             elif appext == "" and config.supportnoext is True:
-                apptype = ""
+                apptype = "unknown"
 
             if apptype is not None:
                 appinfo.append(apptype)

@@ -10,3 +10,4 @@ appnames = {
 verbose = False
 maxmatch = 5
 supportnoext = True
+limitdept = True
