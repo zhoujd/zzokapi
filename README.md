@@ -11,7 +11,7 @@ zzokapi
 import os
 import sys
 
-coredirname="agt-core"
+coredirname="zz-core"
 okapidirname="okapi"
 helpdoc = None
 
