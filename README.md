@@ -11,8 +11,8 @@ zzokapi
 import os
 import sys
 
-coredirname="zz-core"
-okapidirname="okapi"
+coredirname = "zz-core"
+okapidirname = "okapi"
 helpdoc = None
 
 def main():
