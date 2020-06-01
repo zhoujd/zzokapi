@@ -5,14 +5,18 @@ import os
 import framework.config as config
 
 class Dispatch:
-    def __init__(self, workdir, srcdir, argv):
+    def __init__(self, workdir, srcdir, argv, helpdoc):
         self.workdir = workdir
         self.srcdir = srcdir
         self.params = argv
         self.appmap = {}
         self.entryname = os.path.basename(argv[0])
+        self.helpdoc = helpdoc
 
     def run(self):
+        if config.verbose is True:
+            print("Work directory: %s" % self.workdir)
+
         self.getappmap()
         if len(self.params) == 1:
             self.usage()
@@ -40,13 +44,17 @@ class Dispatch:
             else:
                 if config.verbose is True:
                     print(app)
+
                 cmdline = "%s %s" % (" ".join(app), args)
                 print("cmdline: %s\n" % cmdline)
                 os.system(cmdline)
 
     def usage(self):
-        for key, value in sorted(self.appmap.items()):
-            print("Use: %s %s [argv]" % (self.entryname, key.replace("-", " ")))
+        if self.helpdoc is not None:
+            print("%s" % self.helpdoc)
+        else:
+            for key, value in sorted(self.appmap.items()):
+                print("Use: %s %s [argv]" % (self.entryname, key.replace("-", " ")))
 
     def findapp(self, app):
         if app in self.appmap.keys():
