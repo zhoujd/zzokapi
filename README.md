@@ -42,5 +42,6 @@ if __name__ == '__main__':
 ```
 $ mkdir zz-core
 $ cd zz-core
-$ touch test.sh
+$ vim test.sh
+$ chmod +x test.sh
 ```
