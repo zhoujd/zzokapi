@@ -44,9 +44,9 @@ class Dispatch:
             else:
                 if config.verbose is True:
                     print(app)
-
                 cmdline = "%s %s" % (" ".join(app), args)
-                print("cmdline: %s\n" % cmdline)
+                if config.verbose is True:
+                    print("cmdline: %s\n" % cmdline)
                 os.system(cmdline)
 
     def usage(self):
