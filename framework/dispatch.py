@@ -92,7 +92,7 @@ class Dispatch:
             if appext in config.appnames:
                 apptype = config.appnames[appext]
             elif appext == "" and config.supportnoext is True:
-                apptype = "unknown"
+                apptype = ""
 
             if apptype is not None:
                 appinfo.append(apptype)
