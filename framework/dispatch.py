@@ -2,10 +2,11 @@
 # -*- coding: utf-8 -*-
 
 import os
+import re
 import framework.config as config
 
 class Dispatch:
-    def __init__(self, workdir, srcdir, argv, helpdoc):
+    def __init__(self, workdir, srcdir, argv, helpdoc=None):
         self.workdir = workdir
         self.srcdir = srcdir
         self.params = argv
@@ -54,7 +55,12 @@ class Dispatch:
             print("%s" % self.helpdoc)
         else:
             for key, value in sorted(self.appmap.items()):
-                print("Use: %s %s [argv]" % (self.entryname, key.replace("-", " ")))
+                key = key.replace("---", "-++")
+                key = key.replace("--", "-+")
+                sublist = key.split("-")
+                sublist = [x.replace("+", "-") for x in sublist]
+                subcmd = " ".join(sublist)
+                print("Use: %s %s [argv]" % (self.entryname, subcmd))
 
     def findapp(self, app):
         if app in self.appmap.keys():
