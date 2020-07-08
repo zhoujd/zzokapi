@@ -6,6 +6,7 @@ appnames = {
     ".py": "python",
     ".pl": "perl",
     ".sh": "bash",
+    ".go": "go run",
 }
 verbose = False
 maxmatch = 5
