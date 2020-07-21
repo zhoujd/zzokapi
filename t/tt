@@ -6,7 +6,7 @@ import os
 import sys
 
 coredirname = "tt-core"
-okapidirname = "okapi"
+okapidirname = ".."  # okapi path
 helpdoc = None
 
 def main():
