@@ -15,8 +15,8 @@ def main():
     srcdir = srcdir.replace("\\", "/")
     sys.path.append(os.path.join(srcdir, okapidirname))
 
-    import utils.common as common
-    import framework.dispatch as dispatch
+    from utils import common
+    from framework import dispatch
 
     common.setcoredir(coredirname)
     workdir = common.getworkdir()
